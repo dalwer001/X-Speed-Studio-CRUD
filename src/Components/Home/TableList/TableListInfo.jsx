@@ -91,14 +91,11 @@ const TableListInfo = ({ user }) => {
         setSearchByIdStatus(false)
     }
 
-
-
     //For reorder dragging 
     const reorder = (row, startIndex, endIndex) => {
         const result = Array.from(row);
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
-
         return result;
     }
 
@@ -112,7 +109,8 @@ const TableListInfo = ({ user }) => {
     return (
 
         <div className="container mt-3">
-            {!allDataShowStatus && <button onClick={handleClickShowAllButton} style={{ marginLeft: '91%' }} className="btn btn-outline-success">Show all</button>}
+            <div className="d-flex m-5">
+            {!allDataShowStatus && <button onClick={handleClickShowAllButton}  className="btn btn-outline-success btn-sm">Show all</button>}
             <br />
 
 
@@ -124,6 +122,7 @@ const TableListInfo = ({ user }) => {
                 </>
             )}
 
+            </div>
 
             {allDataShowStatus ?
 
@@ -150,25 +149,26 @@ const TableListInfo = ({ user }) => {
                                     {
                                         rows.map((row, index) => (
                                             <Draggable
-                                                draggableId="{row.id}"
+                                                draggableId={row.id}
                                                 key={row.id}
                                                 index={index}
                                             >
                                                 {(provided, snapshot) => (
+
                                                     <tr ref={provided.innerRef}
-                                                    {...provided.draggableProps}
-                                                    {...provided.dragHandleProps}>
+                                                        {...provided.draggableProps}
+                                                        {...provided.dragHandleProps}>
+                                                            
                                                         <td>
-                                                        <button onClick={() => handleOnClick(row.id)} className="btn btn-outline-secondary btn-sm ">
-                                                            {row.id}
-                                                        </button>
+                                                            <button onClick={() => handleOnClick(row.id)} className="btn btn-outline-secondary btn-sm ">
+                                                                {row.id}
+                                                            </button>
                                                         </td>
                                                         <td>{row.name}</td>
                                                         <td>{row.message}</td>
                                                         <td>{row.created_at}</td>
                                                         <td>{row.extra_junk_field}</td>
                                                     </tr>
-
                                                 )}
                                             </Draggable>
                                         ))}
@@ -178,8 +178,7 @@ const TableListInfo = ({ user }) => {
                         </Droppable>
                     </DragDropContext>
                 </table>
-
-                : ''}
+                : " "}
 
 
 
@@ -193,7 +192,6 @@ const TableListInfo = ({ user }) => {
                             )}
                     </tr>
                 </thead>
-
                 {
                     searchById.map(row =>
                         <tbody>
@@ -210,12 +208,13 @@ const TableListInfo = ({ user }) => {
                             </tr>
                         </tbody>
                     )}
-            </table>}
+            </table>
+            }
 
 
 
             {/* Search By Name */}
-            {searchByNameStatus && <table className="table">
+            {searchByNameStatus && <table className="table table-bordered border-secondary">
                 <thead>
                     <tr>
                         {
@@ -244,7 +243,7 @@ const TableListInfo = ({ user }) => {
 
 
             {/* Search By Submission Date */}
-            {searchByDateStatus && <table className="table">
+            {searchByDateStatus && <table className="table table-bordered border-secondary">
                 <thead>
                     <tr>
                         {
@@ -269,8 +268,6 @@ const TableListInfo = ({ user }) => {
                         </tbody>
                     )}
             </table>}
-
-
         </div>
     );
 };
