@@ -142,7 +142,7 @@ const TableListInfo = ({ user }) => {
 
                     {/* Draggable part */}
                     <DragDropContext onDragEnd={onEnd}>
-                        <Droppable droppableId="12345678">
+                        <Droppable droppableId="123456789">
                             {(provided, snapshot) => (
                                 <tbody className="table table-bordered border-secondary"
                                     ref={provided.innerRef}
@@ -155,11 +155,9 @@ const TableListInfo = ({ user }) => {
                                                 index={index}
                                             >
                                                 {(provided, snapshot) => (
-                                                    <tr
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                    >
+                                                    <tr ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}>
                                                         <td>
                                                         <button onClick={() => handleOnClick(row.id)} className="btn btn-outline-secondary btn-sm ">
                                                             {row.id}
